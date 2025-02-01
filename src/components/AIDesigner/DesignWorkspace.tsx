@@ -6,7 +6,7 @@ import GeneratedDesigns from "./GeneratedDesigns";
 import useDesignStore from "../../stores/designStore";
 
 export default function DesignWorkspace() {
-  const { isGenerating, generateDesigns } = useDesignStore();
+  const { isGenerating, generateDesignsFunc } = useDesignStore();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-50 py-16">
@@ -37,7 +37,7 @@ export default function DesignWorkspace() {
             </div>
 
             <button
-              onClick={generateDesigns}
+              onClick={generateDesignsFunc}
               disabled={isGenerating}
               className="w-full py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg hover:from-orange-600 hover:to-amber-600 transition duration-300 flex items-center justify-center disabled:opacity-50"
             >

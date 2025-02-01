@@ -21,7 +21,7 @@ interface DesignStore {
   error: string | null;
   setUploadedFile: (file: File | null) => void;
   updateParameter: (key: keyof DesignParameters, value: any) => void;
-  generateDesigns: () => Promise<void>;
+  generateDesignsFunc: () => Promise<void>;
   clearError: () => void;
 }
 
@@ -48,27 +48,46 @@ const useDesignStore = create<DesignStore>((set, get) => ({
 
   clearError: () => set({ error: null }),
 
-  generateDesigns: async () => {
+  generateDesignsFunc: async () => {
     const { uploadedFile, parameters } = get();
     set({ isGenerating: true, error: null });
 
     try {
-      let imageBase64;
+      let imageBase64: string | null = null;
       if (uploadedFile) {
         const reader = new FileReader();
-        imageBase64 = await new Promise((resolve, reject) => {
+        const result = await new Promise((resolve, reject) => {
           reader.onload = () => resolve(reader.result as string);
           reader.onerror = () => reject(new Error('Failed to read file'));
           reader.readAsDataURL(uploadedFile);
         });
+
+      // Ensure the result is a string
+      if (typeof result === 'string') {
+        imageBase64 = result;
+      } else {
+        throw new Error('Failed to convert image to base64');
       }
 
+      }
+
+      /*
       const designs = await generateDesigns({
+        
         ...parameters,
         image: imageBase64,
       });
+      */
+      const response = await fetch('http://localhost:3000/designs');
+      console.log("yooooo");
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
 
-      set({ generatedDesigns: designs });
+      const json = await response.json();
+      console.log(json);
+
+      //set({ generatedDesigns: designs });
     } catch (error) {
       // Convert error to string to ensure it's serializable
       const errorMessage = error instanceof Error ? error.message : 'Failed to generate designs. Please try again.';

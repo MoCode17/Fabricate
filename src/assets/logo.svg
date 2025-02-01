@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
+  <!-- Background Circuit Pattern -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B2C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB02C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main Logo Shape - Simplified Needle & Thread form -->
+  <path d="M40 40 C40 25, 60 25, 60 40 S80 55, 80 40" 
+        stroke="url(#gradient)" 
+        fill="none" 
+        stroke-width="3"
+        stroke-linecap="round"/>
+  
+  <!-- AI Circuit Node Points -->
+  <circle cx="40" cy="40" r="3" fill="#FF6B2C"/>
+  <circle cx="60" cy="40" r="3" fill="#FF8B2C"/>
+  <circle cx="80" cy="40" r="3" fill="#FFB02C"/>
+  
+  <!-- Company Name -->
+  <text x="95" y="45" 
+        font-family="Arial, sans-serif" 
+        font-weight="bold" 
+        font-size="24" 
+        fill="#333333">
+    FABRICATE
+  </text>
+  
+  <!-- AI Subtitle -->
+  <text x="95" y="60" 
+        font-family="Arial, sans-serif" 
+        font-size="16" 
+        fill="#666666">
+    AI
+  </text>
+  
+  <!-- Abstract Fabric Pattern -->
+  <path d="M30 35 Q35 45, 40 35 T50 35" 
+        stroke="#FFB02C" 
+        fill="none" 
+        stroke-width="1.5"
+        opacity="0.6"/>
+  
+  <!-- Circuit Lines -->
+  <line x1="43" y1="40" x2="57" y2="40" stroke="#FF8B2C" stroke-width="1" opacity="0.4"/>
+  <line x1="63" y1="40" x2="77" y2="40" stroke="#FF8B2C" stroke-width="1" opacity="0.4"/>
+</svg>
