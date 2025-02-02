@@ -1,12 +1,12 @@
-import React from "react";
 import { Upload, Palette, Wand2, Download } from "lucide-react";
 import FileUploader from "./FileUploader";
 import ParameterControls from "./ParameterControls";
 import GeneratedDesigns from "./GeneratedDesigns";
-import useDesignStore from "../../stores/designStore";
+import { useDesign } from "../../stores/designContext";
 
 export default function DesignWorkspace() {
-  const { isGenerating, generateDesignsFunc } = useDesignStore();
+  const { isGenerating, generateDesignsFunc, uploadedFile, setUploadedFile } =
+    useDesign();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-50 py-16">
@@ -46,7 +46,7 @@ export default function DesignWorkspace() {
             </button>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 min-h-[600px]">
             <div className="bg-white rounded-xl shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold">Generated Designs</h2>

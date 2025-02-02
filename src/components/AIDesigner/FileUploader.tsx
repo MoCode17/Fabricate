@@ -1,25 +1,33 @@
-import React, { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { Upload, X } from 'lucide-react';
-import useDesignStore from '../../stores/designStore';
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import { Upload, X } from "lucide-react";
+import { useDesign } from "../../stores/designContext";
+
+interface props {
+  uploadedFile: File | null;
+  setUploadedFile: (file: File | null) => void;
+}
 
 export default function FileUploader() {
-  const { uploadedFile, setUploadedFile } = useDesignStore();
+  const { uploadedFile, setUploadedFile } = useDesign();
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles[0]) {
-      setUploadedFile(acceptedFiles[0]);
-    }
-  }, [setUploadedFile]);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles[0]) {
+        setUploadedFile(acceptedFiles[0]);
+      }
+    },
+    [setUploadedFile]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'image/svg+xml': ['.svg'],
-      'image/png': ['.png'],
-      'application/illustrator': ['.ai']
+      "image/svg+xml": [".svg"],
+      "image/png": [".png"],
+      "application/illustrator": [".ai"],
     },
-    maxFiles: 1
+    maxFiles: 1,
   });
 
   const removeFile = () => setUploadedFile(null);
@@ -30,7 +38,11 @@ export default function FileUploader() {
         <div
           {...getRootProps()}
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
-            ${isDragActive ? 'border-orange-500 bg-orange-50' : 'border-gray-300 hover:border-orange-500'}`}
+            ${
+              isDragActive
+                ? "border-orange-500 bg-orange-50"
+                : "border-gray-300 hover:border-orange-500"
+            }`}
         >
           <input {...getInputProps()} />
           <Upload className="mx-auto h-12 w-12 text-gray-400" />
